@@ -1,0 +1,107 @@
+1.	Import libraries such as Pandas, matplotlib, NumPy, and seaborn and load the insurance dataset
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns 
+data = pd.read_csv('insurance.csv')
+
+
+2.	Check the shape of the data along with the data types of the column
+
+data.shape
+data.info()
+data.isna().sum()
+
+
+3.	Check missing values in the dataset and find the appropriate measures to fill in the missing values
+
+
+ax = sns.countplot(x='smoker', data=data)  # Assign the plot to 'ax'
+
+plt.title("Count of Smoker and Non-Smoker")
+plt.xlabel("Smoker")
+plt.ylabel("Count")
+
+# Add labels to bars
+for container in ax.containers:
+    ax.bar_label(container)
+
+plt.show()
+
+
+4.	Explore the relationship between the feature and target column using a count plot of categorical columns and a scatter plot of numerical columns
+
+
+# Create the plot and assign it to 'ax'
+ax = sns.countplot(x='region', data=data, hue='smoker')  
+
+plt.title("Count of Smoker and Non-Smoker by Region")
+plt.xlabel("Region")  # Corrected xlabel to match the x-axis variable
+plt.ylabel("Count")
+
+# Add labels to bars
+for container in ax.containers:
+    ax.bar_label(container)
+
+plt.show()
+
+
+5.	Perform data visualization using plots of feature vs feature
+
+
+sns.scatterplot(x='age', y='charges', data=data)
+
+
+
+6.	Check if the number of premium charges for smokers or non-smokers is increasing as they are aging
+
+
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Create a figure with subplots
+fig, axs = plt.subplots(2, 3, figsize=(15, 10))  # Adjust the figure size as needed
+
+# Scatter plots with correct variable assignments
+sns.scatterplot(x="age", y="bmi", hue="smoker", data=data, ax=axs[0,0])
+axs[0,0].set_title("Age vs BMI")
+
+sns.scatterplot(x="age", y="children", hue="smoker", data=data, ax=axs[0,1])
+axs[0,1].set_title("Age vs Children")
+
+sns.scatterplot(x="age", y="charges", hue="smoker", data=data, ax=axs[0,2])
+axs[0,2].set_title("Age vs Charges")
+
+sns.scatterplot(x="bmi", y="children", hue="smoker", data=data, ax=axs[1,0])
+axs[1,0].set_title("BMI vs Children")
+
+sns.scatterplot(x="bmi", y="charges", hue="smoker", data=data, ax=axs[1,1])
+axs[1,1].set_title("BMI vs Charges")
+
+sns.scatterplot(x="children", y="charges", hue="smoker", data=data, ax=axs[1,2])
+axs[1,2].set_title("Children vs Charges")
+
+plt.tight_layout()  # Adjust layout to prevent overlap
+plt.show()
+
+
+7. Check if the number of premium charges for smokers or non-smokers is increasing as they are aging
+
+import seaborn as sns
+import matplotlib.pyplot as plt
+import numpy as np
+
+sns.lineplot(data=data, x="age", y="charges", hue="smoker", estimator=np.mean)
+plt.title("Average insurance charges vs age by smoking status")
+plt.xlabel("Age")
+plt.ylabel("Charges")
+plt.grid(True)
+plt.show()
+
+
+
+
+
+
+
